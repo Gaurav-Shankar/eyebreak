@@ -22,3 +22,7 @@ Requires macOS 12+ and the Xcode Command Line Tools. It compiles with `swiftc` d
 | `SettingsView.swift` | Settings window |
 | `Settings.swift`, `Stats.swift` | Preferences and streaks (UserDefaults) |
 | `LaunchAtLogin.swift` | Login item via `~/Library/LaunchAgents` |
+
+## License
+
+MIT — see [LICENSE](LICENSE).
