@@ -9,7 +9,7 @@ A lightweight macOS menu bar app that reminds you to rest your eyes with the 20-
 ./build.sh --install  # also copies it to /Applications and relaunches it
 ```
 
-Requires macOS 12+ and the Xcode Command Line Tools. It compiles with `swiftc` directly; no Xcode or SwiftPM needed.
+Requires macOS 12+ and the Xcode Command Line Tools. It compiles with `swiftc` directly (no Xcode or SwiftPM needed) into a universal app that runs natively on Apple Silicon and Intel. For a quicker single-architecture build: `ARCHS=arm64 ./build.sh`.
 
 ## Layout
 

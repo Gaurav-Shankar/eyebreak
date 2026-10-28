@@ -6,10 +6,17 @@ cd "$(dirname "$0")"
 APP=build/EyeBreak.app
 ICON=build/AppIcon.icns
 
-# Compiled with swiftc directly: the Command Line Tools here ship without a working SwiftPM.
+# Compiled with swiftc directly: some Command Line Tools installs ship without a working SwiftPM.
+# Builds a universal binary (Apple Silicon + Intel). Override with e.g. ARCHS=arm64 for a faster local build.
+ARCHS="${ARCHS:-arm64 x86_64}"
 mkdir -p build
 BIN=build/EyeBreak
-swiftc -O -target "$(uname -m)-apple-macos12.0" -o "$BIN" Sources/EyeBreak/*.swift
+SLICES=()
+for arch in $ARCHS; do
+    swiftc -O -swift-version 5 -target "$arch-apple-macos12.0" -o "build/EyeBreak-$arch" Sources/EyeBreak/*.swift
+    SLICES+=("build/EyeBreak-$arch")
+done
+lipo -create -output "$BIN" "${SLICES[@]}"
 
 if [ ! -f "$ICON" ]; then
     ICONSET=build/AppIcon.iconset
